@@ -23,37 +23,37 @@ public class SearchPage extends ElementUtils{
 	WebElement getFromCityNameElement;
 	@FindBy (xpath="//*[@id='toCity']")
 	WebElement getToCityNameElement;
-	
+
 	WebDriver driver;
-	
+
 	public SearchPage(WebDriver driver)
 	{
 		this.driver=driver;
 		PageFactory.initElements(driver, this);
 	}
-	
+
 	public void ClickFromLocation() throws InterruptedException
 	{
 		Thread.sleep(5000);
 		//Explicitwaitforelementobeclickable(driver, driver.findElement(By.xpath("//*[@for='fromCity']")));
 		Explicitwaitforelementobeclickable(driver, fromCityElement);
-		
+
 		//WebElement from = driver.findElement(By.xpath("//*[@for='fromCity']"));
 		ButtonClick(fromCityElement);
 
 	}
-	
+
 	public void ClickToLocation() throws InterruptedException
 	{
 		//Thread.sleep(5000);
 		//Explicitwaitforelementobeclickable(driver, driver.findElement(By.xpath("//*[@for='toCity']")));
 		Explicitwaitforelementobeclickable(driver, toCityElement);
-		
+
 		//driver.findElement(By.xpath("//*[@for='toCity']")).click();
 		//toCity.click();
 		ButtonClick(toCityElement);
 	}
-	
+
 	public void SelectLocation(String expectedLocation)
 	{
 		String basePath= "//*[@id='react-autowhatever-1']//li";
@@ -67,15 +67,15 @@ public class SearchPage extends ElementUtils{
 				driver.findElement(By.xpath("("+basePath+"["+i+"])[last()]")).click();
 				break;
 			}
-				
+
 		}
 	}
-	
+
 	public void SelectADate(String dateToBeSelect)
 	{
 		String basePath ="((//*[@class='DayPicker-Month'])[last()-1]//*[@class='DayPicker-Week']//div[contains(@class,'DayPicker-Day')])";
 		Explicitwaitforpresencefelement(driver, By.xpath(basePath));
-		
+
 		List<WebElement> AllDates = driver.findElements(By.xpath(basePath));
 		for(int i=1;i<=AllDates.size();i++)
 		{
@@ -93,36 +93,36 @@ public class SearchPage extends ElementUtils{
 					}
 				}
 			}
-			
+
 		}
 	}
-	
+
 	public void ClickOnSearchButton()
 	{
 		//WebElement search  =driver.findElement(By.xpath("//*[text()='Search']"));
 		ButtonClick(searchButton);
 	}
-	
+
 	public String GetErrorMessageForSameCity()
 	{
 		String basepath = "//*[@data-cy='sameCityError']";
 		List<WebElement> elementExist = driver.findElements(By.xpath(basepath));
 		if (elementExist.size() >0)
 		{
-		Explicitwaitforpresencefelement(driver, By.xpath(basepath));
-		return driver.findElement(By.xpath(basepath)).getText();
+			Explicitwaitforpresencefelement(driver, By.xpath(basepath));
+			return driver.findElement(By.xpath(basepath)).getText();
 		}
 		return "No Error Exist";
 	}
-	
+
 	public String GetFromLocationName()
 	{
 		//Explicitwaitforpresencefelement(driver, fromCityElementBy);
 		Explicitwaitforpresencefelement(driver, By.xpath(fromCityElementBy));
-		
+
 		return GetAttribute(getFromCityNameElement, "value");
 	}
-	
+
 	public String GetToLocationName()
 	{
 		Explicitwaitforpresencefelement(driver, By.xpath("//*[@id='toCity']"));
@@ -130,10 +130,15 @@ public class SearchPage extends ElementUtils{
 		return GetAttribute(getToCityNameElement, "value");
 
 	}
-	
+
 	public String GetSearchResultValue()
 	{
 		String finalResult = "Flights from "+GetFromLocationName()+" to "+GetToLocationName();
 		return finalResult;
+	}
+
+	public String GetApplicationTitle()
+	{
+		return driver.getTitle();
 	}
 }

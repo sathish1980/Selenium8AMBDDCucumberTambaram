@@ -15,7 +15,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class ElementUtils 
+public class ElementUtils
 {
 
 	public void EnterInToTextBox(WebElement elementToEnter, String textToBeEnter)
@@ -26,7 +26,7 @@ public class ElementUtils
 			elementToEnter.sendKeys(textToBeEnter);
 		}
 	}
-	
+
 	public void ButtonClick(WebElement buttonWebelement)
 	{
 		if(buttonWebelement.isDisplayed())
@@ -35,7 +35,7 @@ public class ElementUtils
 		}
 
 	}
-	
+
 	public void RadioButtonClick(WebElement buttonWebelement)
 	{
 		if(buttonWebelement.isSelected()==false)
@@ -44,7 +44,7 @@ public class ElementUtils
 		}
 
 	}
-	
+
 	public void checkBoxClick(WebElement buttonWebelement)
 	{
 		if(buttonWebelement.isSelected()==false)
@@ -53,7 +53,7 @@ public class ElementUtils
 		}
 
 	}
-	
+
 	public void uncheckBoxClick(WebElement buttonWebelement)
 	{
 		if(buttonWebelement.isSelected()==true)
@@ -62,33 +62,33 @@ public class ElementUtils
 		}
 
 	}
-	
+
 	public void Explicitwaitforelementobeclickable(WebDriver driver,WebElement elementobeclickableWebelement)
 	{
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.elementToBeClickable(elementobeclickableWebelement));
 
 	}
-	
+
 	public void Explicitwaitforvisibilityofelement(WebDriver driver,WebElement elementobeclickableWebelement)
 	{
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.visibilityOfAllElements(elementobeclickableWebelement));
 
 	}
-	
+
 	public void Explicitwaitforpresencefelement(WebDriver driver,By elementobeclickableWebelement)
 	{
 		WebDriverWait wait = new WebDriverWait(driver,Duration.ofSeconds(60));
 		wait.until(ExpectedConditions.presenceOfElementLocated(elementobeclickableWebelement));
 
 	}
-	
+
 	public static String takescreenshot(WebDriver driver)
 	{
 		Date date = new Date();
-	      //This method returns the time in millis
-	    long timeMilli = date.getTime();
+		//This method returns the time in millis
+		long timeMilli = date.getTime();
 		String date_v= String.valueOf(timeMilli);
 		//System.out.println(date_v);
 		TakesScreenshot ts =(TakesScreenshot)driver;
@@ -100,11 +100,11 @@ public class ElementUtils
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 		return Destinationfile.toString();
 	}
 
-	
+
 	public void SelectAValueFromList(WebDriver driver, String expectedloaction)
 	{
 		List<WebElement> AllValues = driver.findElements(By.xpath("//*[@class='react-autosuggest__suggestions-list']//li"));
@@ -118,12 +118,12 @@ public class ElementUtils
 			}
 		}
 	}
-	
+
 	public void ClickOnBackButton(WebDriver driver)
 	{
 		driver.navigate().back();
 	}
-	
+
 	public String GetAttribute(WebElement elementToRetrive,String retriveAttribute)
 	{
 		if(elementToRetrive.isDisplayed())
@@ -132,7 +132,7 @@ public class ElementUtils
 		}
 		return null;
 	}
-	
+
 	public String GetText(WebElement elementToRetrive)
 	{
 		if(elementToRetrive.isDisplayed())
@@ -141,11 +141,24 @@ public class ElementUtils
 		}
 		return null;
 	}
-	
-	
+
+
+	public void CloseAdds(WebDriver driver) throws InterruptedException
+	{
+		Thread.sleep(2000);
+		List<WebElement> elementExist = driver.findElements(By.xpath("//*[@data-cy='closeModal']"));
+		if(elementExist.size()>0)
+		{
+			Explicitwaitforelementobeclickable(driver,driver.findElement(By.xpath("//*[@data-cy='closeModal']")));
+			driver.findElement(By.xpath("//*[@data-cy='closeModal']")).click();
+
+		}
+
+	}
+
 	public void ClearPopups(WebDriver driver) throws InterruptedException
 	{
-		//Thread.sleep(5000);
+		Thread.sleep(5000);
 		List<WebElement> AllFrames =driver.findElements(By.tagName("iframe"));
 		for(int i=0;i<AllFrames.size();i++)
 		{

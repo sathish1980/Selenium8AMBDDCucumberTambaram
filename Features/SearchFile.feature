@@ -17,7 +17,8 @@
 ## (Comments)
 #Sample Feature Definition Template
 @tag
-Feature: To verify the search funcationlity in Makemytrip
+Feature: Title of your feature
+  I want to use this template for my feature file
 
   Scenario Outline: To verify the flight search with Valid from and to location with mutilple data
     Given Launch the Browser and Enter the URL
